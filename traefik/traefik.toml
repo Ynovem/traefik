@@ -1,0 +1,47 @@
+debug = true
+logLevel = "INFO"
+defaultEntryPoints = ["http"]
+
+[entryPoints]
+	[entryPoints.http]
+		address = ":80"
+
+[api]
+	entryPoint = "traefik"
+	dashboard = true
+	debug = true
+
+#defaultEntryPoints = ["https", "http"]
+#
+#[entryPoints]
+#	[entryPoints.dashboard]
+#		address = ":8080"
+#		[entryPoints.dashboard.auth]
+#			[entryPoints.dashboard.auth.basic]
+#				users = ["admin:your_encrypted_password"]
+#	[entryPoints.http]
+#		address = ":80"
+##		[entryPoints.http.redirect]
+##		entryPoint = "https"
+##	[entryPoints.https]
+##	address = ":443"
+##		[entryPoints.https.tls]
+#
+#[api]
+#	entrypoint="dashboard"
+#
+#[retry]
+#
+#[docker]
+#	endpoint = "unix:///var/run/docker.sock"
+#	domain = "traefik-test.com"
+#	watch = true
+##	exposedByDefault = false
+#
+##[acme]
+##email = "feher.gergo@gmail.com"
+##storage = "acme.json"
+##entryPoint = "https"
+##onHostRule = true
+##	[acme.httpChallenge]
+##	entryPoint = "http"

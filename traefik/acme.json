@@ -1,0 +1,19 @@
+{
+  "Account": {
+    "Email": "feher.gergo@gmail.com",
+    "Registration": {
+      "body": {
+        "status": "valid",
+        "contact": [
+          "mailto:feher.gergo@gmail.com"
+        ]
+      },
+      "uri": ""
+    },
+    "PrivateKey": "",
+    "KeyType": "4096"
+  },
+  "Certificates": null,
+  "HTTPChallenges": {},
+  "TLSChallenges": {}
+}
