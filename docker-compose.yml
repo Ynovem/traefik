@@ -1,41 +1,28 @@
 version: "2"
 
 services:
-#    whoami:
-#        image: "traefik/whoami"
-#        container_name: "simple-service"
-#        labels:
-#            # Explicitly tell Traefik to expose this container
-#            - "traefik.enable=true"
-#            # The domain the service will respond to
-#            - "traefik.http.routers.whoami.rule=Host(`whoami.localhost`)"
-#            # Allow request only from the predefined entry point named "web"
-#            - "traefik.http.routers.whoami.entrypoints=localhost"
 
     traefik:
         image: "traefik:v1.7"
         container_name: "traefik"
-#        command:
-#            # Enabling docker provider
-#            - "--providers.docker=true"
-#            # Do not expose containers unless explicitly told so
-#            - "--providers.docker.exposedbydefault=false"
         ports:
             - "80:80"
-#            - "443:443"
-#        networks:
-#            - webproxy
-#            - web
+            - "8080:8080"
         volumes:
             - "/var/run/docker.sock:/var/run/docker.sock:ro"
             - "$PWD/traefik/traefik.toml:/traefik.toml"
             - "$PWD/traefik/acme.json:/acme.json"
         restart: unless-stopped
 
-#networks:
-#    webproxy:
-#        driver: bridge
+    whoami:
+        image: "traefik/whoami"
+        container_name: "simple-service"
+        labels:
+            # Explicitly tell Traefik to expose this container
+            - "traefik.enable=true"
 
-#networks:
-#    web:
-#        external: false
+            # Overrides the default frontend rule.
+            # Default:
+            #   Host:{containerName}.{domain} or
+            #   Host:{service}.{project_name}.{domain} if you are using docker-compose.
+            - "traefik.frontend.rule=Host:localhost"

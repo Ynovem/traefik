@@ -5,43 +5,25 @@ defaultEntryPoints = ["http"]
 [entryPoints]
 	[entryPoints.http]
 		address = ":80"
+	[entryPoints.dashboard]
+		address = ":8080"
+			[entryPoints.dashboard.auth]
+				[entryPoints.dashboard.auth.basic]
+					# Generated with (package: apache2-utils): htpasswd -nbB admin "admin"
+					# This example's users:
+					#   User: admin1 Password: admin1
+					#   User: admin2 Password: admin2
+					users = [
+						"admin1:$2y$05$Q4OKE2znUWLh4nOE7W7Xy.WKQ3y2eWVoxvjSgnt85DiYU4PehLiXO",
+						"admin2:$2y$05$v1zm08saCDUoZVilc.iRJeA5HEwnbjde/eihTgXyPb/gy7Nz6VW8m"
+					]
 
 [api]
-	entryPoint = "traefik"
+	entryPoint = "dashboard"
 	dashboard = true
 	debug = true
 
-#defaultEntryPoints = ["https", "http"]
-#
-#[entryPoints]
-#	[entryPoints.dashboard]
-#		address = ":8080"
-#		[entryPoints.dashboard.auth]
-#			[entryPoints.dashboard.auth.basic]
-#				users = ["admin:your_encrypted_password"]
-#	[entryPoints.http]
-#		address = ":80"
-##		[entryPoints.http.redirect]
-##		entryPoint = "https"
-##	[entryPoints.https]
-##	address = ":443"
-##		[entryPoints.https.tls]
-#
-#[api]
-#	entrypoint="dashboard"
-#
-#[retry]
-#
-#[docker]
-#	endpoint = "unix:///var/run/docker.sock"
-#	domain = "traefik-test.com"
-#	watch = true
-##	exposedByDefault = false
-#
-##[acme]
-##email = "feher.gergo@gmail.com"
-##storage = "acme.json"
-##entryPoint = "https"
-##onHostRule = true
-##	[acme.httpChallenge]
-##	entryPoint = "http"
+[docker]
+	endpoint = "unix:///var/run/docker.sock"
+	watch = true
+	exposedByDefault = false
